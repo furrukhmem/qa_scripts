@@ -1,3 +1,3 @@
 # cre_scripts
 
-this is a test
+script to install update and uninstall jenkins for cli
