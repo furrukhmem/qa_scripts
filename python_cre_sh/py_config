@@ -1,0 +1,13 @@
+[Unit] 
+Description=Python server
+
+[Service]
+User=pythonadm
+
+WorkingDirectory=/home/pythonadm
+
+ExecStart=/usr/bin/python /home/pythonadm/app.py
+
+[Install] 
+
+WantedBy=multi-user.target
