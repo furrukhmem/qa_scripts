@@ -4,9 +4,9 @@ Description=Python server
 [Service]
 User=pythonadm
 
-WorkingDirectory=/home/pythonadm
+WorkingDirectory=/home/pythonadm/simplepyserver
 
-ExecStart=/usr/bin/python /home/pythonadm/app.py
+ExecStart=/usr/bin/python3.7 app.py
 
 [Install] 
 
