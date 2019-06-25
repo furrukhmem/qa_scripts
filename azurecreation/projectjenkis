@@ -1,0 +1,24 @@
+#!/bin/bash
+
+az group create --name projectjenki --location uksouth
+
+az network vnet create --resource-group projectjenki --name VirtualNetworkJenki --address-prefixes 10.0.0.0/16 --subnet-name SubnetJenki --subnet-prefix 10.0.10.0/24
+
+az network nsg create --resource-group projectjenki --name NsgJenki
+
+az network nsg rule create --name SSH --destination-port-ranges 22 --nsg-name NsgJenki --priority 400 -g projectjenki
+
+
+az network public-ip create --resource-group projectjenki --name JenkiPublicIP
+az network nic create --resource-group projectjenki --name NicJenki --vnet-name VirtualNetworkJenki --subnet SubnetJenki --network-security-group NsgJenki --public-ip-address JenkiPublicIP
+az vm create --resource-group projectjenki --name jenki --nics NicJenki --size Standard_B1ls --image UbuntuLTS
+
+
+az network public-ip create --resource-group projectjenki --name buildPublicIP
+az network nic create --resource-group projectjenki --name buildNic --vnet-name VirtualNetworkJenki --subnet SubnetJenki --network-security-group NsgJenki --public-ip-address buildPublicIP
+az vm create --resource-group projectjenki --name build --nics buildNic --size Standard_B1ls --image UbuntuLTS
+
+
+az network public-ip create --resource-group projectjenki --name pyServerIP
+az network nic create --resource-group projectjenki --name pyNic --vnet-name VirtualNetworkJenki --subnet SubnetJenki --network-security-group NsgJenki --public-ip-address pyServerIP
+az vm create --resource-group projectjenki --name pyServer --nics pyNic --size Standard_B1ls --image UbuntuLTS
