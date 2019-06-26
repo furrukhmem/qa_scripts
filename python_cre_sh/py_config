@@ -6,7 +6,7 @@ User=pythonadm
 
 WorkingDirectory=/home/pythonadm/simplepyserver
 
-ExecStart=/usr/bin/python3 app.py
+ExecStart=/usr/bin/python3.7 app.py
 
 [Install]
 
