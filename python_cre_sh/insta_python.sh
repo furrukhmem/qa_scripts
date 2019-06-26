@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ $(which java) ]
-then
+#if [ $(which java) ]
+#then
 
 	echo 'install script running'
 	# create a jenkins user and make sure that a home directory is created for it
@@ -19,7 +19,7 @@ then
 
 	sudo systemctl enable pythonserve
 
-else
-	echo 'java not installed install it'
-	echo 'sudo apt install -y wget vim openjdk-8-jdk openjdk-8-jre '
-fi
+#else
+#	echo 'java not installed install it'
+#	echo 'sudo apt install -y wget vim openjdk-8-jdk openjdk-8-jre '
+#fi
