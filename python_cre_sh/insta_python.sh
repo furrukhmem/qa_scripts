@@ -11,7 +11,7 @@
 
 	sudo usermod --shell /bin/bash pythonadm
 
-	sudo cp ./py_config /etc/systemd/system/pythonserve.service
+	sudo cp /home/ser/python_cre_sh/py_config /etc/systemd/system/pythonserve.service
 
 	sudo systemctl daemon-reload
 
