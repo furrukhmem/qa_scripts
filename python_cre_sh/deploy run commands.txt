@@ -1,0 +1,16 @@
+# paste into build in jenkins web gui
+
+pwd 
+ls
+
+#cd python_cre_sh
+
+scp -r python_cre_sh ser@pyserver:~
+
+ssh ser@pyserver bash ~/python_cre_sh/insta_python.sh
+
+scp -r simplepyserver ser@pyserver:/home/pythonadm/simplepyserver/
+
+#ssh ser@pyserver python3 /home/pythonadm/simplepyserver/app.py
+
+ssh ser@pyserver sudo systemctl start pythonserve
