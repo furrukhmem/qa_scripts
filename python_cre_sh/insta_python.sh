@@ -13,6 +13,8 @@
 
 	sudo cp /home/ser/python_cre_sh/py_config /etc/systemd/system/pythonserve.service
 
+	sudo chmod -R 777 /home/pythonadm
+
 	sudo systemctl daemon-reload
 
 	sudo systemctl start pythonserve
