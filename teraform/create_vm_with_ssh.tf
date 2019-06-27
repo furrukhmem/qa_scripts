@@ -19,7 +19,7 @@ variable "adpass" {
 }
 
 variable "macsize" {
-  default="Standard_B1ls"
+  default="Standard_B2s"
 }
 
 resource "azurerm_resource_group" "main" {
@@ -73,7 +73,7 @@ resource "azurerm_network_security_group" "main" {
     access                     = "Allow"
     protocol                   = "udp"
     source_port_range          = "*"
-    destination_port_range     = "8081"
+    destination_port_range     = "8080"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
