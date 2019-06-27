@@ -66,6 +66,17 @@ resource "azurerm_network_security_group" "main" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+  security_rule {
+    name                       = "http_alt"
+    priority                   = 1020
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "udp"
+    source_port_range          = "*"
+    destination_port_range     = "8081"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
 }
 
 resource "azurerm_network_interface" "main" {
@@ -113,5 +124,16 @@ resource "azurerm_virtual_machine" "main" {
       path     = "/home/${var.aduser}/.ssh/authorized_keys"
       key_data = file("~/.ssh/id_rsa.pub")
     }
+  }
+
+  provisioner "remote-exec" {
+	inline = ["apt update","sudo apt install -y wget vim openjdk-8-jdk openjdk-8-jre","git clone https://github.com/yamileon/cre_scripts.git",
+            "sudo bash ~/cre_scripts/jenkins_installer_sh/insta_jenkins.sh"]
+  	connection {
+		type = "ssh"
+		user = "${var.aduser}"
+		private_key = file("~/.ssh/id_rsa")
+		host = "${azurerm_public_ip.main.fqdn}"
+  	}
   }
 }

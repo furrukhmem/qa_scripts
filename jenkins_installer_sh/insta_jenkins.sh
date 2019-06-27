@@ -15,7 +15,7 @@ then
         
         #sudo su -jenkins -c 'cp /home/jenkins/jenkins.war /home/ser/Documents/jenkins.war'
 
-	sudo cp ./jenki_config /etc/systemd/system/jenkins.service
+	sudo cp ~/cre_scripts/jenkins_installer_sh/jenki_config /etc/systemd/system/jenkins.service
 
 	sudo systemctl daemon-reload
 
