@@ -2,6 +2,22 @@ variable "prefix" {
   default = "tfvmex"
 }
 
+variable "compname" {
+  default="testbot"
+}
+
+variable "aduser" {
+  default="ser"
+}
+
+variable "adpass" {
+  default="Zxcvbnm123!"
+}
+
+variable "macsize" {
+  default="Standard_B1ls"
+}
+
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-resources"
   location = "uksouth"
@@ -65,7 +81,7 @@ resource "azurerm_virtual_machine" "main" {
   location              = "${azurerm_resource_group.main.location}"
   resource_group_name   = "${azurerm_resource_group.main.name}"
   network_interface_ids = ["${azurerm_network_interface.main.id}"]
-  vm_size               = "Standard_B1ls"
+  vm_size               = "${var.macsize}"
 
   # Uncomment this line to delete the OS disk automatically when deleting the VM
   # delete_os_disk_on_termination = true
@@ -87,15 +103,15 @@ resource "azurerm_virtual_machine" "main" {
     managed_disk_type = "Standard_LRS"
   }
   os_profile {
-    computer_name  = "hostname"
-    admin_username = "testadmin"
-    admin_password = "Password1234!"
+    computer_name  = "${var.compname}"
+    admin_username = "${var.aduser}"
+    admin_password = "${var.adpass}"
   }
   os_profile_linux_config {
     disable_password_authentication = false
 
     ssh_keys {
-      path     = "/home/testadmin/.ssh/authorized_keys"
+      path     = "/home/${var.aduser}/.ssh/authorized_keys"
       key_data = file("~/.ssh/id_rsa.pub")
     }
   }
