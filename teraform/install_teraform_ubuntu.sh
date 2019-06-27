@@ -6,7 +6,7 @@ sudo apt update
 
 sudo apt upgrade -y
 
-sudo apt install -y unzip wget
+sudo apt install -y unzip wget jq
 
 wget $url
 
