@@ -1,3 +1,7 @@
+provider "azurerm" {
+	version = "=1.30.1"
+}
+
 variable "prefix" {
   default = "tfvmex"
 }
@@ -38,23 +42,11 @@ resource "azurerm_subnet" "internal" {
 }
 
 resource "azurerm_public_ip" "main" {
-    name                         = "${var.prefix}-publicip"
-    location                     = "${azurerm_resource_group.main.location}"
-    resource_group_name          = "${azurerm_resource_group.main.name}"
-    allocation_method            = "Dynamic"
-}
-
-resource "azurerm_network_interface" "main" {
-  name                = "${var.prefix}-nic"
-  location            = "${azurerm_resource_group.main.location}"
-  resource_group_name = "${azurerm_resource_group.main.name}"
-
-  ip_configuration {
-    name                          = "testconfiguration1"
-    subnet_id                     = "${azurerm_subnet.internal.id}"
-    private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = "${azurerm_public_ip.main.id}"
-  }
+    name                = "${var.prefix}-publicip"
+    location            = "${azurerm_resource_group.main.location}"
+    resource_group_name = "${azurerm_resource_group.main.name}"
+    allocation_method   = "Dynamic"
+    domain_name_label   = "${var.aduser}-${formatdate("DDMMYYhhmmss", timestamp())}"
 }
 
 # Create Network Security Group and rule
@@ -76,19 +68,26 @@ resource "azurerm_network_security_group" "main" {
   }
 }
 
+resource "azurerm_network_interface" "main" {
+  name                = "${var.prefix}-nic"
+  location            = "${azurerm_resource_group.main.location}"
+  resource_group_name = "${azurerm_resource_group.main.name}"
+  network_security_group_id = "${azurerm_network_security_group.main.id}"
+
+  ip_configuration {
+    name                          = "testconfiguration1"
+    subnet_id                     = "${azurerm_subnet.internal.id}"
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = "${azurerm_public_ip.main.id}"
+  }
+}
+
 resource "azurerm_virtual_machine" "main" {
   name                  = "${var.prefix}-vm"
   location              = "${azurerm_resource_group.main.location}"
   resource_group_name   = "${azurerm_resource_group.main.name}"
   network_interface_ids = ["${azurerm_network_interface.main.id}"]
   vm_size               = "${var.macsize}"
-
-  # Uncomment this line to delete the OS disk automatically when deleting the VM
-  # delete_os_disk_on_termination = true
-
-
-  # Uncomment this line to delete the data disks automatically when deleting the VM
-  # delete_data_disks_on_termination = true
 
   storage_image_reference {
     publisher = "Canonical"
