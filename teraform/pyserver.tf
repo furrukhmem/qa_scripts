@@ -3,7 +3,7 @@ resource "azurerm_public_ip" "pyserver" {
     location            = "${azurerm_resource_group.main.location}"
     resource_group_name = "${azurerm_resource_group.main.name}"
     allocation_method   = "Dynamic"
-    domain_name_label   = "${var.aduserbuild}-${formatdate("DDMMYYhhmmss", timestamp())}"
+    domain_name_label   = "${var.aduserpy}-${formatdate("DDMMYYhhmmss", timestamp())}"
 }
 
 resource "azurerm_network_interface" "pyserver" {
