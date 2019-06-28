@@ -6,7 +6,7 @@ resource "azurerm_public_ip" "jenki_build" {
     domain_name_label   = "${var.aduser}-${formatdate("DDMMYYhhmmss", timestamp())}"
 }
 
-resource "azurerm_network_interface_build" "main" {
+resource "azurerm_network_interface" "jenki_build" {
   name                = "${var.prefix_jenki_build}-nic"
   location            = "${azurerm_resource_group.main.location}"
   resource_group_name = "${azurerm_resource_group.main.name}"
@@ -20,11 +20,11 @@ resource "azurerm_network_interface_build" "main" {
   }
 }
 
-resource "azurerm_virtual_machine_build" "main" {
+resource "azurerm_virtual_machine" "jenki_build" {
   name                  = "${var.prefix_jenki_build}-vm"
   location              = "${azurerm_resource_group.main.location}"
   resource_group_name   = "${azurerm_resource_group.main.name}"
-  network_interface_ids = ["${azurerm_network_interface_build.main.id}"]
+  network_interface_ids = ["${azurerm_network_interface.jenki_build.id}"]
   vm_size               = "${var.macsize}"
 
   storage_image_reference {
@@ -60,7 +60,7 @@ resource "azurerm_virtual_machine_build" "main" {
 		type = "ssh"
 		user = "${var.aduser}"
 		private_key = file("~/.ssh/id_rsa")
-		host = "${azurerm_public_ip_jenki_build.main.fqdn}"
+		host = "${azurerm_public_ip_jenki.jenki_build.fqdn}"
   	}
   }
 }
