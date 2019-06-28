@@ -6,7 +6,7 @@ resource "azurerm_public_ip_jenki_build" "main" {
     domain_name_label   = "${var.aduser}-${formatdate("DDMMYYhhmmss", timestamp())}"
 }
 
-resource "azurerm_network_interface" "main" {
+resource "azurerm_network_interface_build" "main" {
   name                = "${var.prefix_jenki_build}-nic"
   location            = "${azurerm_resource_group.main.location}"
   resource_group_name = "${azurerm_resource_group.main.name}"
@@ -20,11 +20,11 @@ resource "azurerm_network_interface" "main" {
   }
 }
 
-resource "azurerm_virtual_machine" "main" {
+resource "azurerm_virtual_machine_build" "main" {
   name                  = "${var.prefix_jenki_build}-vm"
   location              = "${azurerm_resource_group.main.location}"
   resource_group_name   = "${azurerm_resource_group.main.name}"
-  network_interface_ids = ["${azurerm_network_interface.main.id}"]
+  network_interface_ids = ["${azurerm_network_interface_build.main.id}"]
   vm_size               = "${var.macsize}"
 
   storage_image_reference {
