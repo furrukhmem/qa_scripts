@@ -58,7 +58,7 @@ resource "azurerm_network_security_group" "jenki_build" {
 }
 
 resource "azurerm_network_security_group" "pyserver" {
-  name                = "${var.prefix_py}-nsg"
+  name                = "${var.prefix_pyserver}-nsg"
   location            = "${azurerm_resource_group.main.location}"
   resource_group_name = "${azurerm_resource_group.main.name}"
 
