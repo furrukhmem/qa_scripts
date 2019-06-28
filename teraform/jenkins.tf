@@ -1,4 +1,4 @@
-resource "azurerm_public_ip" "main" {
+resource "azurerm_public_ip_jenki" "main" {
     name                = "${var.prefix_jenki}-publicip"
     location            = "${azurerm_resource_group.main.location}"
     resource_group_name = "${azurerm_resource_group.main.name}"
@@ -10,13 +10,13 @@ resource "azurerm_network_interface" "main" {
   name                = "${var.prefix_jenki}-nic"
   location            = "${azurerm_resource_group.main.location}"
   resource_group_name = "${azurerm_resource_group.main.name}"
-  network_security_group_id = "${azurerm_network_security_group.main.id}"
+  network_security_group_id = "${azurerm_network_security_group_jenki_build.main.id}"
 
   ip_configuration {
     name                          = "testconfiguration1"
     subnet_id                     = "${azurerm_subnet.internal.id}"
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = "${azurerm_public_ip.main.id}"
+    public_ip_address_id          = "${azurerm_public_ip_jenki.main.id}"
   }
 }
 
@@ -60,7 +60,7 @@ resource "azurerm_virtual_machine" "main" {
 		type = "ssh"
 		user = "${var.aduser}"
 		private_key = file("~/.ssh/id_rsa")
-		host = "${azurerm_public_ip.main.fqdn}"
+		host = "${azurerm_public_ip_jenki.main.fqdn}"
   	}
   }
 }
