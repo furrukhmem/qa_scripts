@@ -1,5 +1,5 @@
 resource "azurerm_public_ip" "main" {
-    name                = "${var.prefix_jenki}-publicip"
+    name                = "${var.prefix_jenki_build}-publicip"
     location            = "${azurerm_resource_group.main.location}"
     resource_group_name = "${azurerm_resource_group.main.name}"
     allocation_method   = "Dynamic"
@@ -7,7 +7,7 @@ resource "azurerm_public_ip" "main" {
 }
 
 resource "azurerm_network_interface" "main" {
-  name                = "${var.prefix_jenki}-nic"
+  name                = "${var.prefix_jenki_build}-nic"
   location            = "${azurerm_resource_group.main.location}"
   resource_group_name = "${azurerm_resource_group.main.name}"
   network_security_group_id = "${azurerm_network_security_group.main.id}"
@@ -21,7 +21,7 @@ resource "azurerm_network_interface" "main" {
 }
 
 resource "azurerm_virtual_machine" "main" {
-  name                  = "${var.prefix_jenki}-vm"
+  name                  = "${var.prefix_jenki_build}-vm"
   location              = "${azurerm_resource_group.main.location}"
   resource_group_name   = "${azurerm_resource_group.main.name}"
   network_interface_ids = ["${azurerm_network_interface.main.id}"]
@@ -34,13 +34,13 @@ resource "azurerm_virtual_machine" "main" {
     version   = "latest"
   }
   storage_os_disk {
-    name              = "${var.diskname_jenki}"
+    name              = "${var.diskname_jenki_build}"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
   os_profile {
-    computer_name  = "${var.compname_jenki}"
+    computer_name  = "${var.compname_jenki_build}"
     admin_username = "${var.aduser}"
     admin_password = "${var.adpass}"
   }
