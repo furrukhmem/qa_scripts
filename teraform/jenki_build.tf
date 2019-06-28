@@ -60,7 +60,7 @@ resource "azurerm_virtual_machine" "jenki_build" {
 		type = "ssh"
 		user = "${var.aduser}"
 		private_key = file("~/.ssh/id_rsa")
-		host = "${azurerm_public_ip_jenki.jenki_build.fqdn}"
+		host = "${azurerm_public_ip.jenki_build.fqdn}"
   	}
   }
 }

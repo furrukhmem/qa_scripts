@@ -60,7 +60,7 @@ resource "azurerm_virtual_machine" "main" {
 		type = "ssh"
 		user = "${var.aduser}"
 		private_key = file("~/.ssh/id_rsa")
-		host = "${azurerm_public_ip_jenki.main.fqdn}"
+		host = "${azurerm_public.main.fqdn}"
   	}
   }
 }
