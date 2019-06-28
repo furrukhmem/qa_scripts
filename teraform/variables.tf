@@ -47,6 +47,14 @@ variable "aduser" {
   default="ser"
 }
 
+variable "aduserbuild" {
+  default="ser1"
+}
+
+variable "aduserpy" {
+  default="ser2"
+}
+
 variable "adpass" {
   default="Zxcvbnm123!"
 }
