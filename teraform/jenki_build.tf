@@ -41,14 +41,14 @@ resource "azurerm_virtual_machine" "jenki_build" {
   }
   os_profile {
     computer_name  = "${var.compname_jenki_build}"
-    admin_username = "${var.aduser}"
+    admin_username = "${var.aduserbuild}"
     admin_password = "${var.adpass}"
   }
   os_profile_linux_config {
     disable_password_authentication = false
 
     ssh_keys {
-      path     = "/home/${var.aduser}/.ssh/authorized_keys"
+      path     = "/home/${var.aduserbuild}/.ssh/authorized_keys"
       key_data = file("~/.ssh/id_rsa.pub")
     }
   }
