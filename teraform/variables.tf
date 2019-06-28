@@ -18,7 +18,7 @@ variable "compname_jenki" {
 variable "diskname_jenki" {
   default="jenkidisk"
 }
-
+#------------------------------------------------------------
 variable "prefix_jenki_build" {
   default = "jenkiBuild"
 }
@@ -30,7 +30,7 @@ variable "compname_jenki_build" {
 variable "diskname_jenki_build" {
   default="jenkibuilddisk"
 }
-
+#---------------------------------------------------------------
 variable "prefix_py" {
   default = "pyslave"
 }
@@ -42,7 +42,7 @@ variable "compname_py" {
 variable "diskname_pyslave" {
   default = "pyslavedisk"
 }
-
+#-----------------------------------------------------------------
 variable "aduser" {
   default="ser"
 }

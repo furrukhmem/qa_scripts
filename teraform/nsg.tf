@@ -1,5 +1,5 @@
 # Create Network Security Group and rule
-resource "azurerm_network_security_group_jenki" "main" {
+resource "azurerm_network_security_group" "main" {
   name                = "${var.prefix_jenki}-nsg"
   location            = "${azurerm_resource_group.main.location}"
   resource_group_name = "${azurerm_resource_group.main.name}"
@@ -28,7 +28,7 @@ resource "azurerm_network_security_group_jenki" "main" {
   }
 }
 
-resource "azurerm_network_security_group_jenki_build" "main" {
+resource "azurerm_network_security_group" "jenki_build" {
   name                = "${var.prefix_jenki_build}-nsg"
   location            = "${azurerm_resource_group.main.location}"
   resource_group_name = "${azurerm_resource_group.main.name}"
@@ -57,7 +57,7 @@ resource "azurerm_network_security_group_jenki_build" "main" {
   }
 }
 
-resource "azurerm_network_security_group_pyserver" "main" {
+resource "azurerm_network_security_group" "pyserver" {
   name                = "${var.prefix_py}-nsg"
   location            = "${azurerm_resource_group.main.location}"
   resource_group_name = "${azurerm_resource_group.main.name}"
