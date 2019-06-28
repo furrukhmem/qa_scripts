@@ -31,15 +31,15 @@ variable "diskname_jenki_build" {
   default="jenkibuilddisk"
 }
 #---------------------------------------------------------------
-variable "prefix_py" {
+variable "prefix_pyserver" {
   default = "pyslave"
 }
 
-variable "compname_py" {
+variable "compname_pyserver" {
   default="pyslave"
 }
 
-variable "diskname_pyslave" {
+variable "diskname_pyserver" {
   default = "pyslavedisk"
 }
 #-----------------------------------------------------------------
@@ -60,5 +60,5 @@ variable "adpass" {
 }
 
 variable "macsize" {
-  default="Standard_B2s"
+  default="Standard_B1s"
 }
