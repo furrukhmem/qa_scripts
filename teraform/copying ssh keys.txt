@@ -1,0 +1,5 @@
+scp ~/.ssh/id_rsa ser@51.143.134.22:~/.ssh/
+
+ssh ser@51.143.134.22 sudo cp -r /home/ser/.ssh/ /home/jenkins/.ssh/
+
+ssh ser@51.143.134.22 'echo "jenkins     ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers'
