@@ -1,0 +1,25 @@
+#ubuntu-1804-bionic-v20190628
+
+
+gcloud compute instances create test$1 --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud
+
+echo 'vm made'
+
+gcloud compute firewall-rules create everything 
+
+echo 'firewall done'
+
+gcloud compute config-ssh
+
+echo 'config ssh done'
+# gcloud compute ssh test$1
+
+gcloud compute scp pool_deploy.sh test$1:~/pool_deploy.sh
+
+echo 'copy script done'
+
+IP="gcloud compute instances describe test$1 --format='get(networkInterfaces[0].accessConfigs[0].natIP)'"
+
+gcloud compute ssh test$1 --command "bash ~/pool_deploy.sh $IP"
+
+echo 'script done'

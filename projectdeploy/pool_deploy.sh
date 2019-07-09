@@ -5,6 +5,8 @@ sudo apt-get install -y nodejs
 
 sudo apt install -y mongodb
 
+cd ~
+
 git clone -b furr-dev2 https://github.com/yamileon/poolmanage-ui.git
 
 git clone -b dev https://github.com/yamileon/poolmanager-api.git
@@ -19,9 +21,9 @@ echo '[Unit]
 Description=ui server
 
 [Service]
-User=yamileon_xfz
+User=ser
 
-WorkingDirectory=/home/yamileon_xfz/poolmanage-ui
+WorkingDirectory=/home/ser/poolmanage-ui
 
 ExecStart=/usr/bin/npm run startg
 
@@ -34,11 +36,11 @@ echo '[Unit]
 Description=api server
 
 [Service]
-User=yamileon_xfz
+User=ser
 
-WorkingDirectory=/home/yamileon_xfz/poolmanager-api
+WorkingDirectory=/home/ser/poolmanager-api
 
-ExecStart=/usr/bin/node /home/yamileon_xfz/poolmanager-api/index.js
+ExecStart=/usr/bin/node index.js
 
 [Install]
 
@@ -51,10 +53,9 @@ echo "export const environment = {
 
 sudo systemctl start poolmanagerapi
 
-sudo systemctl enable poolmanagerapi
-
 sudo systemctl start poolmanagerui
 
+sudo systemctl enable poolmanagerapi
 sudo systemctl enable poolmanagerui
 
 sudo systemctl daemon-reload
