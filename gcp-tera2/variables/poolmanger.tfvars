@@ -1,6 +1,6 @@
 # project = "zeta-rush-204812" 
-project = "poolmangerpro" 
-name = "poolmangername"
+project = "seventh-port-246109" 
+name = "seventh"
 packages = [
 	"git"
 ]
