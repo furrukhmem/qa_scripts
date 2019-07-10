@@ -5,25 +5,30 @@ sudo apt-get install -y nodejs
 
 sudo apt install -y mongodb
 
-cd ~
+sudo useradd --create-home webrunner
+sudo usermod --shell /bin/bash webrunner
+# sudo cp /home/ser/python_cre_sh/py_config /etc/systemd/system/pythonserve.service
+sudo chmod -R 777 /home/webrunner
+
+cd /home/webrunner
 
 git clone -b furr-dev2 https://github.com/yamileon/poolmanage-ui.git
 
 git clone -b dev https://github.com/yamileon/poolmanager-api.git
 
-cd ~/poolmanage-ui
+cd /home/webrunner/poolmanage-ui
 yes | npm install
 
-cd ~/poolmanager-api
+cd /home/webrunner/poolmanager-api
 npm install 
 
 echo '[Unit]
 Description=ui server
 
 [Service]
-User=ser
+User=webrunner
 
-WorkingDirectory=/home/ser/poolmanage-ui
+WorkingDirectory=/home/webrunner/poolmanage-ui
 
 ExecStart=/usr/bin/npm run startg
 
@@ -36,9 +41,9 @@ echo '[Unit]
 Description=api server
 
 [Service]
-User=ser
+User=webrunner
 
-WorkingDirectory=/home/ser/poolmanager-api
+WorkingDirectory=/home/webrunner/poolmanager-api
 
 ExecStart=/usr/bin/node index.js
 
@@ -49,7 +54,7 @@ WantedBy=multi-user.target' | sudo tee /etc/systemd/system/poolmanagerapi.servic
 echo "export const environment = {
   production: false,
   url: 'http://"$1":8080'
-};" > ~/poolmanage-ui/src/environments/environment.ts
+};" > /home/webrunner/poolmanage-ui/src/environments/environment.ts
 
 sudo systemctl start poolmanagerapi
 
