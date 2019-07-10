@@ -3,7 +3,7 @@ variable "project" {
 }
 
 variable "name" {
-	default = "default"
+	default = "default-${formatdate("DDMMYYhhmmss", timestamp())}"
 }
 
 variable "machine_type" {
@@ -19,7 +19,7 @@ variable "image" {
 }
 
 variable "network" {
-	default = "default"
+	default = "default-${formatdate("DDMMYYhhmmss", timestamp())}"
 }
 
 variable "ssh_user" {
