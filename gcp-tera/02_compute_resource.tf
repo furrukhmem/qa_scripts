@@ -14,15 +14,17 @@ resource "google_compute_instance" "default" {
 			// Ephemeral IP
 		}
 	}
-	metadata {
+	
+	provisioner "remote-exec" {
+
+		metadata {
     	sshKeys = "${var.ssh_user}:${file("${var.public_key}")}"
-  	}	
+  	}
 	connection = {
 		type = "ssh"
 		user = "${var.ssh_user}"
 		private_key = "${file("${var.private_key}")}"
 	}
-	provisioner "remote-exec" {
 		inline = [
 			"${var.update_packages[var.package_manager]}",
 			"${var.install_packages[var.package_manager]} ${join(" ", var.packages)}"
