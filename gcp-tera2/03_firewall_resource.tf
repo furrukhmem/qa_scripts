@@ -1,5 +1,5 @@
 resource "google_compute_firewall" "default" {
-	name = "${var.name}-firewall"
+	name = "${var.name}"
 	network = "${var.network}"
 	target_tags = ["${var.name}"]
 	source_ranges = ["0.0.0.0/0"]
