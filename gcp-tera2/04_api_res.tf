@@ -1,5 +1,5 @@
 resource "google_compute_instance" "api" {
-	name = "${var.api.name}"
+	name = "${var.nameapi}"
 	machine_type = "${var.machine_type}"
 	zone = "${var.zone}"
 	tags = ["${var.name}"]
@@ -20,7 +20,7 @@ resource "google_compute_instance" "api" {
 	connection {
 		type = "ssh"
 		user = "${var.ssh_user}"
-    host = "${google_compute_instance.api.network_interface.0.access_config.0.nat_ip}"
+    host = "${google_compute_instance.nameapi.network_interface.0.access_config.0.nat_ip}"
 		private_key = "${file("${var.private_key}")}"
 	}
 	provisioner "remote-exec" {

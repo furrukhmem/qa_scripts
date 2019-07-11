@@ -6,6 +6,14 @@ variable "name" {
 	default = "default"
 }
 
+variable "nameapi" {
+  default="default"
+}
+
+variable "namedb" {
+  default="default"
+}
+
 variable "machine_type" {
 	default = "g1-small"
 }
