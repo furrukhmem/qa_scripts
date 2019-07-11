@@ -19,13 +19,15 @@ python-systemd-http-server-destroy:
 	@"${TERRAFORM_APPLY}${VAR_DIR}"/python-systemd-http-server.tfvars
 
 pool-install:
-	@"${TERRAFORM_APPLY}${VAR_DIR}"/poolmanger.tfvars
-	@"${TERRAFORM_APPLY}${VAR_DIR}"/poolmangerapi.tfvars
-	@"${TERRAFORM_APPLY}${VAR_DIR}"/poolmangerdb.tfvars
+	@"${TERRAFORM_APPLY}${VAR_DIR}"/poolmanger.tfvars -target=google_compute_instance.default
+	@"${TERRAFORM_APPLY}${VAR_DIR}"/poolmangerapi.tfvars -target=google_compute_instance.api
+	@"${TERRAFORM_APPLY}${VAR_DIR}"/poolmangerdb.tfvars -target=google_compute_instance.db
+	terraform apply -auto-approve -target=google_compute_firewall.default
 
 pool-destroy:
-	@"${TERRAFORM_DESTROY}${VAR_DIR}"/poolmanger.tfvars
-	@"${TERRAFORM_DESTROY}${VAR_DIR}"/poolmangerapi.tfvars
-	@"${TERRAFORM_DESTROY}${VAR_DIR}"/poolmangerdb.tfvars
+	@"${TERRAFORM_DESTROY}${VAR_DIR}"/poolmanger.tfvars -target=google_compute_instance.default
+	@"${TERRAFORM_DESTROY}${VAR_DIR}"/poolmangerapi.tfvars -target=google_compute_instance.api
+	@"${TERRAFORM_DESTROY}${VAR_DIR}"/poolmangerdb.tfvars -target=google_compute_instance.db
+	terraform destroy -auto-approve -target=google_compute_firewall.default
 
 .PHONY = terraform-init jenkins-apply jenkins-destroy python-systemd-http-server-apply python-systemd-http-server-destroy pool-install pool-destroy
