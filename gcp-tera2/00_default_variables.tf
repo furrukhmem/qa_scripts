@@ -7,11 +7,11 @@ variable "name" {
 }
 
 variable "nameapi" {
-  default="default"
+  default="rem"
 }
 
 variable "namedb" {
-  default="default"
+  default="ren"
 }
 
 variable "machine_type" {
