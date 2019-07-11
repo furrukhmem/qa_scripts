@@ -30,6 +30,13 @@ ExecStart=/usr/bin/node index.js
 
 WantedBy=multi-user.target' | sudo tee /etc/systemd/system/poolmanagerapi.service
 
+echo "exports.app = {
+    PORT: 8080,
+    MONGODB_URI: 'mongodb://"$1":27017/qac',
+    logErrors: true
+};" > /home/webrunner/poolmanager-api/config.js
+
+
 sudo systemctl start poolmanagerapi
 
 sudo systemctl enable poolmanagerapi
