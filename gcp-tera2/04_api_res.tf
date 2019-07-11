@@ -1,4 +1,4 @@
-resource "google_compute_instance" "api" {
+resource "google_compute_instance" "default" {
 	name = "${var.nameapi}"
 	machine_type = "${var.machine_type}"
 	zone = "${var.zone}"
