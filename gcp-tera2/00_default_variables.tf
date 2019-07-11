@@ -7,7 +7,7 @@ variable "name" {
 }
 
 variable "machine_type" {
-	default = "f1-micro"
+	default = "g1-small"
 }
 
 variable "zone" {
@@ -35,7 +35,7 @@ variable "private_key" {
 }
 
 variable "package_manager" {
-	default = "yum"
+	default = "apt"
 }
 
 variable "update_packages" {
