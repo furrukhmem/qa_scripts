@@ -15,7 +15,7 @@ variable "zone" {
 }
 
 variable "image" {
-	default = "centos-7"
+	default = "ubuntu-1804-lts"
 }
 
 variable "network" {
