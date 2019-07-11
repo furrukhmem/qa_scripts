@@ -26,7 +26,8 @@ resource "google_compute_instance" "default" {
 	provisioner "remote-exec" {
 		inline = [
 			"${var.update_packages[var.package_manager]}",
-			"${var.install_packages[var.package_manager]} ${join(" ", var.packages)}"
+			"${var.install_packages[var.package_manager]} ${join(" ", var.packages)}",
+			"echo ${google_compute_instance.api.network_interface.0.access_config.0.nat_ip} > /tmp/api_ip.txt"
 		]
 	}
 	provisioner "remote-exec" {
