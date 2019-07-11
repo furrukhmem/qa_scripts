@@ -1,6 +1,6 @@
 # project = "zeta-rush-204812" 
 project = "seventh-port-246109" 
-nameapi = "seventh-api"
+name = "seventh-api"
 packages = [
 	"git"
 ]
