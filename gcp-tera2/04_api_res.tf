@@ -1,5 +1,5 @@
 resource "google_compute_instance" "api" {
-	name = "${var.name}"
+	name = "${var.api.name}"
 	machine_type = "${var.machine_type}"
 	zone = "${var.zone}"
 	tags = ["${var.name}"]
