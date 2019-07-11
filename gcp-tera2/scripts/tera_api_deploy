@@ -1,0 +1,7 @@
+cd ~
+
+git clone https://github.com/yamileon/cre_scripts
+
+cd ~/cre_scripts/gcp-tera2/runtime-scripts
+
+bash pool_api seventh-db

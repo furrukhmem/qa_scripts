@@ -20,8 +20,12 @@ python-systemd-http-server-destroy:
 
 pool-install:
 	@"${TERRAFORM_APPLY}${VAR_DIR}"/poolmanger.tfvars
+	@"${TERRAFORM_APPLY}${VAR_DIR}"/poolmangerapi.tfvars
+	@"${TERRAFORM_APPLY}${VAR_DIR}"/poolmangerdb.tfvars
 
 pool-destroy:
 	@"${TERRAFORM_DESTROY}${VAR_DIR}"/poolmanger.tfvars
+	@"${TERRAFORM_DESTROY}${VAR_DIR}"/poolmangerapi.tfvars
+	@"${TERRAFORM_DESTROY}${VAR_DIR}"/poolmangerdb.tfvars
 
 .PHONY = terraform-init jenkins-apply jenkins-destroy python-systemd-http-server-apply python-systemd-http-server-destroy pool-install pool-destroy

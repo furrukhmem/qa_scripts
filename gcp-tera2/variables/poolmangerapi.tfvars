@@ -1,10 +1,10 @@
 # project = "zeta-rush-204812" 
 project = "seventh-port-246109" 
-name = "seventh-ui"
+name = "seventh-api"
 packages = [
 	"git"
 ]
 scripts = [
-	"scripts/tera_ui_deploy"
+	"scripts/tera_api_deploy"
 ]
 allowed_ports = [ "22", "8080","4200"]

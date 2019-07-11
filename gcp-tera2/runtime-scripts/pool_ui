@@ -1,0 +1,42 @@
+#!/bin/bash
+sudo apt update
+
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt install -y nodejs
+
+sudo useradd --create-home webrunner
+sudo usermod --shell /bin/bash webrunner
+# sudo cp /home/ser/python_cre_sh/py_config /etc/systemd/system/pythonserve.service
+sudo chmod -R 777 /home/webrunner
+
+cd /home/webrunner
+
+git clone -b furr-dev2 https://github.com/yamileon/poolmanage-ui.git
+
+cd /home/webrunner/poolmanage-ui
+yes | npm install
+
+echo '[Unit]
+Description=ui server
+
+[Service]
+User=webrunner
+
+WorkingDirectory=/home/webrunner/poolmanage-ui
+
+ExecStart=/usr/bin/npm run startg
+
+[Install]
+
+WantedBy=multi-user.target' | sudo tee /etc/systemd/system/poolmanagerui.service
+
+echo "export const environment = {
+  production: false,
+  url: 'http://"$1":8080'
+};" > /home/webrunner/poolmanage-ui/src/environments/environment.ts
+
+sudo systemctl start poolmanagerui
+
+sudo systemctl enable poolmanagerui
+
+sudo systemctl daemon-reload
