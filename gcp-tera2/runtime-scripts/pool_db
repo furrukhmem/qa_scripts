@@ -1,8 +1,12 @@
 #!/bin/bash
-# sudo apt update
+sudo apt update
+
+sudo mkdir -p /data/db
 
 sudo apt install -y mongodb
 
-sleep 30 && sudo systemctl stop mongodb && sudo mongod --bind_ip 0.0.0.0
+
+
+# sleep 30 && sudo systemctl stop mongodb && sudo mongod --bind_ip 0.0.0.0
 
 # sudo systemctl start mongodb

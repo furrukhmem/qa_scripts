@@ -14,7 +14,7 @@ cd /home/webrunner
 git clone -b furr-dev2 https://github.com/yamileon/poolmanage-ui.git
 
 cd /home/webrunner/poolmanage-ui
-yes | npm install
+sudo NG_CLI_ANALYTICS=ci npm install
 
 echo '[Unit]
 Description=ui server

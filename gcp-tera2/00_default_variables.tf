@@ -41,7 +41,7 @@ variable "package_manager" {
 variable "update_packages" {
 	default = {
 		"yum" = "sudo yum update -y",
-		"apt" = "sudo apt update && sudo apt upgrade -y"
+		"apt" = "sudo apt update"
 	}
 }
 
