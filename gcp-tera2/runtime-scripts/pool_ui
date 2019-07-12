@@ -18,7 +18,9 @@ cd /home/webrunner/poolmanage-ui
 
 echo "building angular project"
 
-ng build
+sudo NG_CLI_ANALYTICS=ci npm install
+
+npm run build
 project=$(ls dist)
 
 echo "configuring nginx"
