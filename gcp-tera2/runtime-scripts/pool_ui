@@ -3,6 +3,7 @@
 
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt install -y nodejs
+sudo apt install -y nginx
 
 sudo useradd --create-home webrunner
 sudo usermod --shell /bin/bash webrunner
@@ -14,29 +15,39 @@ cd /home/webrunner
 git clone -b furr-dev2 https://github.com/yamileon/poolmanage-ui.git
 
 cd /home/webrunner/poolmanage-ui
-sudo NG_CLI_ANALYTICS=ci npm install
 
-echo '[Unit]
-Description=ui server
+echo "building angular project"
 
-[Service]
-User=webrunner
+ng build
+project=$(ls dist)
 
-WorkingDirectory=/home/webrunner/poolmanage-ui
+echo "configuring nginx"
+sed "s|{{WEB_ROOT}}|$(pwd)/dist/${project}|g" nginx.conf | sudo tee /etc/nginx/nginx.conf
+sudo nginx -s reload
 
-ExecStart=/usr/bin/npm run startg
+# sudo NG_CLI_ANALYTICS=ci npm install
 
-[Install]
+# echo '[Unit]
+# Description=ui server
 
-WantedBy=multi-user.target' | sudo tee /etc/systemd/system/poolmanagerui.service
+# [Service]
+# User=webrunner
 
-echo "export const environment = {
-  production: false,
-  url: 'http://"$1":8080'
-};" > /home/webrunner/poolmanage-ui/src/environments/environment.ts
+# WorkingDirectory=/home/webrunner/poolmanage-ui
 
-sudo systemctl start poolmanagerui
+# ExecStart=/usr/bin/npm run startg
 
-sudo systemctl enable poolmanagerui
+# [Install]
 
-sudo systemctl daemon-reload
+# WantedBy=multi-user.target' | sudo tee /etc/systemd/system/poolmanagerui.service
+
+# echo "export const environment = {
+#   production: false,
+#   url: 'http://"$1":8080'
+# };" > /home/webrunner/poolmanage-ui/src/environments/environment.ts
+
+# sudo systemctl start poolmanagerui
+
+# sudo systemctl enable poolmanagerui
+
+# sudo systemctl daemon-reload
