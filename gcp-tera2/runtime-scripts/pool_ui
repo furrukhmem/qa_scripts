@@ -12,7 +12,7 @@ sudo chmod -R 777 /home/webrunner
 
 cd /home/webrunner
 
-git clone -b furr-dev2 https://github.com/yamileon/poolmanage-ui.git
+git clone -b furr-terra https://github.com/yamileon/poolmanage-ui.git
 
 cd /home/webrunner/poolmanage-ui
 
