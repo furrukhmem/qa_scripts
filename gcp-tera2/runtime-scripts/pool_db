@@ -9,14 +9,14 @@ sudo apt install -y mongodb
 
 sleep 10 && sudo systemctl stop mongodb.service
 
-sudo mongod --bind_ip_all
+# sudo mongod --bind_ip_all
 
-# sudo rm /etc/mongodb.conf
+sudo rm /lib/systemd/system/mongodb.service
 
-# cp ./mongodb.conf /etc/mongodb.conf
+sudo cp .mongodb.service /lib/systemd/system/mongodb.service
 
-# sudo systemctl daemon-reload
+sudo systemctl daemon-reload
 
-# sudo systemctl start mongodb.service
+sudo systemctl start mongodb.service
 
 # sudo systemctl start mongodb
