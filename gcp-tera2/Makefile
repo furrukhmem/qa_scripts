@@ -21,11 +21,11 @@ python-systemd-http-server-destroy:
 pool-install:
 	@"${TERRAFORM_APPLY}${VAR_DIR}"/poolmangerapi.tfvars -target=google_compute_instance.api
 	@"${TERRAFORM_APPLY}${VAR_DIR}"/poolmangerdb.tfvars -target=google_compute_instance.db
-	@"${TERRAFORM_APPLY}${VAR_DIR}"/poolmanger.tfvars -target=google_compute_instance.default
+	@"${TERRAFORM_APPLY}${VAR_DIR}"/poolmanger.tfvars -target=google_compute_instance.ui
 	terraform apply -auto-approve -target=google_compute_firewall.default
 
 pool-destroy:
-	@"${TERRAFORM_DESTROY}${VAR_DIR}"/poolmanger.tfvars -target=google_compute_instance.default
+	@"${TERRAFORM_DESTROY}${VAR_DIR}"/poolmanger.tfvars -target=google_compute_instance.ui
 	@"${TERRAFORM_DESTROY}${VAR_DIR}"/poolmangerapi.tfvars -target=google_compute_instance.api
 	@"${TERRAFORM_DESTROY}${VAR_DIR}"/poolmangerdb.tfvars -target=google_compute_instance.db
 	terraform destroy -auto-approve -target=google_compute_firewall.default

@@ -1,4 +1,4 @@
-resource "google_compute_instance" "default" {
+resource "google_compute_instance" "ui" {
 	name = "${var.name}"
 	machine_type = "${var.machine_type}"
 	zone = "${var.zone}"
