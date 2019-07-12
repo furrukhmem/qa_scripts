@@ -3,6 +3,10 @@ VAR_DIR = "variables"
 TERRAFORM_APPLY = "terraform apply -auto-approve -var-file="
 TERRAFORM_DESTROY = "terraform destroy -auto-approve -var-file="
 
+tera apply -auto-approve -var-file=./variables/poolmangerapi.tfvars -target=google_compute_instance.api
+tera apply -auto-approve -var-file=./variables/poolmangerdb.tfvars -target=google_compute_instance.db
+tera apply -auto-approve -var-file=./variables/poolmangerui.tfvars -target=google_compute_instance.ui
+
 terraform-init:
 	@terraform init
 

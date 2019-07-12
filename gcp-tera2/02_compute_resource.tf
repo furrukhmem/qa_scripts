@@ -1,5 +1,5 @@
 resource "google_compute_instance" "ui" {
-	name = "${var.name}"
+	name = "seventh-ui"
 	machine_type = "${var.machine_type}"
 	zone = "${var.zone}"
 	tags = ["${var.name}"]
