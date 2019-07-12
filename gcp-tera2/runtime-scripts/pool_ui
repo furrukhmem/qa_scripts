@@ -22,7 +22,7 @@ ng build
 project=$(ls dist)
 
 echo "configuring nginx"
-sed "s|{{WEB_ROOT}}|$(pwd)/dist/${project}|g" nginx.conf | sudo tee /etc/nginx/nginx.conf
+sed "s|{{WEB_ROOT}}|$(pwd)/dist/${project}|g" ./nginx.conf | sudo tee /etc/nginx/nginx.conf
 sudo nginx -s reload
 
 # sudo NG_CLI_ANALYTICS=ci npm install
