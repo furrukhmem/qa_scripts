@@ -7,6 +7,12 @@ sudo apt install -y mongodb
 
 
 
-# sleep 30 && sudo systemctl stop mongodb && sudo mongod --bind_ip 0.0.0.0
+sleep 10 && sudo systemctl stop mongodb.service
+
+sudo rm /lib/systemd/system/mongodb.service
+
+cp ./mongodb.conf /lib/systemd/system/mongodb.service
+
+sudo systemctl start mongodb.service
 
 # sudo systemctl start mongodb
