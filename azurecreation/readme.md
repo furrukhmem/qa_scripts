@@ -1,0 +1,1 @@
+creates azure vm network
